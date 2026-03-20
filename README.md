@@ -16,7 +16,9 @@ agentic-rl-research/
 │   ├── 06_interview_guide.md          # 面试准备指南
 │   ├── 07_reproduce_guide.md          # CPU 环境复现指南
 │   ├── 08_reward_hacking_and_design.md # Reward Hacking 检测防御 + Reward 设计方法论
-│   └── 09_search_agent_deep_dive.md   # RL 在 AI 搜索落地的深度坑点 + 面试 20 问
+│   ├── 09_search_agent_deep_dive.md   # RL 在 AI 搜索落地的深度坑点 + 面试 20 问
+│   ├── 10_intent_recognition_interview.md # 搜索意图识别经历包装指南
+│   └── 11_harness_engineering.md          # Harness Engineering 在 RL 中的应用
 ├── code/                              # 克隆的项目代码
 │   └── ...
 └── papers/                            # 相关论文
