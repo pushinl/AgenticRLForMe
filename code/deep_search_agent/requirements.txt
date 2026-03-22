@@ -1,0 +1,15 @@
+torch>=2.1.0
+transformers>=4.40.0
+peft>=0.10.0
+trl>=0.8.0
+datasets>=2.18.0
+accelerate>=0.28.0
+wikipedia-api>=0.6.0
+pyyaml>=6.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+rouge-score>=0.1.2
+wandb
+deepspeed>=0.14.0
+sentencepiece
+protobuf

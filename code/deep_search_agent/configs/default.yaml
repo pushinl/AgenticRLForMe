@@ -1,0 +1,83 @@
+# DeepSearch Agent Configuration
+
+# Model settings
+agent_model:
+  name: "Qwen/Qwen2.5-3B-Instruct"
+  max_length: 2048
+  lora_rank: 64
+  lora_alpha: 128
+  lora_dropout: 0.05
+  lora_target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+prm_model:
+  name: "Qwen/Qwen2.5-1.5B"
+  max_length: 1024
+  hidden_size: 1536  # Qwen2.5-1.5B hidden dim
+  progress_weight: 0.6   # alpha
+  intent_weight: 0.4     # beta
+
+# Environment settings
+env:
+  max_steps: 5
+  max_search_results: 3
+  passage_max_tokens: 200
+  cache_dir: "./cache/wiki"
+
+# Dataset settings
+dataset:
+  name: "hotpot_qa"
+  split_train: "train"
+  split_val: "validation"
+  max_train_samples: 5000
+  max_val_samples: 500
+
+# SFT Phase 1
+sft:
+  num_epochs: 3
+  learning_rate: 2.0e-4
+  batch_size: 4
+  gradient_accumulation_steps: 4
+  warmup_ratio: 0.1
+  max_seq_length: 2048
+  output_dir: "./checkpoints/sft"
+  num_demo_trajectories: 2000
+
+# PRM Phase 2
+prm_training:
+  num_epochs: 5
+  learning_rate: 5.0e-5
+  batch_size: 16
+  gradient_accumulation_steps: 2
+  warmup_ratio: 0.1
+  max_seq_length: 1024
+  output_dir: "./checkpoints/prm"
+  num_rollout_trajectories: 5000
+  progress_loss_weight: 1.0
+  intent_loss_weight: 1.0
+
+# GRPO Phase 3
+grpo:
+  num_episodes: 500
+  learning_rate: 1.0e-5
+  batch_size: 4            # per GPU
+  gradient_accumulation_steps: 4
+  kl_coef: 0.05
+  num_generations: 4       # G in GRPO
+  max_new_tokens: 512
+  temperature: 0.7
+  outcome_reward_weight: 1.0
+  step_reward_weight: 0.5
+  output_dir: "./checkpoints/grpo"
+  save_steps: 100
+
+# Evaluation
+evaluation:
+  batch_size: 8
+  max_samples: 500
+  output_dir: "./results"
+
+# Logging
+logging:
+  use_wandb: false
+  project_name: "deep-search-agent"
+  log_every_n_steps: 10
